@@ -1,0 +1,1 @@
+# shopmax-intelligence-platform
