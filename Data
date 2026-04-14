@@ -1,0 +1,27 @@
+## Week 2 — Data Generation + S3 Bronze Upload
+
+Generated realistic fake e-commerce data using Python to simulate
+a raw OLTP source database for ShopMax.
+
+### Scripts Written
+- generate_customers.py → 1000 customers (ID: 1-1000)
+- generate_sellers.py → 200 sellers (ID: 1000-1199)
+- generate_products.py → 500 products (ID: 10000-10499)
+- generate_orders.py → 10,000 orders (ID: 100000-109999)
+- generate_order_items.py → ~50,000 order items
+- generate_payments.py → 10,000 payments (ID: 50000+)
+
+### Tools Used
+Python, Faker, Pandas, random, boto3
+
+### What Was Done
+- Designed raw data columns by thinking like the website — not the star schema
+- Generated dimensions first (customers, sellers, products) because facts reference them
+- order_items reads from orders.csv to maintain data consistency
+- payments reads from orders.csv for matching amounts and dates
+- All six CSVs uploaded to s3://shopmax-datalake/Bronze_layer/ using boto3
+
+### Key Insight
+Raw data shape ≠ Star schema shape. Bronze layer holds data as the
+application database captured it. Star schema is applied later in
+Snowflake via dbt.
